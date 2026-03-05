@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Изменить профиль{% endblock %}
+
+{% block content %}
+    <h1>Изменить профиль</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.nickname }} <br>
+        {{ form.description }} <br>
+        {{ form.profile_picture }} <br>
+        <input type="submit" class="btn btn-success" value="Изменить">
+    </form>
+{% endblock %}

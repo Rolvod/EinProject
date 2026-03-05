@@ -11,6 +11,8 @@ def register(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
+            new_user.nickname = f'EinUser_{new_user.id}'
+            new_user.save()
             login(request, new_user)
             return redirect('home')
     else:

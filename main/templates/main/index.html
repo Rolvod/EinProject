@@ -6,6 +6,6 @@
     {% if user.is_superuser %}
         <h1>Привет администратор {{ user.username }}!</h1>
     {% else %}
-        <h1>Привет, {{ user.username }}!</h1>
+        <h1>Привет, {{ user.nickname }}!</h1>
     {% endif %} <br><br><br>
 {% endblock %}

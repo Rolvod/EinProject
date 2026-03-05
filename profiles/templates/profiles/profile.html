@@ -10,12 +10,9 @@
             <div class="card shadow-sm border-0">
                 <div class="card-body text-center p-5">
                     
-                    <img src="{{ current_user.profile_picture }}" 
-                         alt="{{ current_user.username }}" 
-                         class="rounded-circle mb-3 border p-1" 
-                         style="width: 120px; height: 120px; object-fit: cover;">
+                    <img src="{{ current_user.profile_picture }}" alt="{{ current_user.username }}" class="rounded-circle mb-3 border p-1" style="width: 120px; height: 120px; object-fit: cover;">
 
-                    <h2 class="fw-bold mb-1">{{ current_user.username }}</h2>
+                    <h2 class="fw-bold mb-1">{{ current_user.nickname }}</h2>
                     <p class="text-muted mb-4">Звание: Новичок EinQuiz</p>
                     
                     <div class="d-flex justify-content-center gap-3 mb-4">
@@ -43,7 +40,7 @@
 
                     {% if user.username == current_user.username %}
                         <div class="d-grid mt-4">
-                            <a href="#" class="btn btn-outline-primary btn-sm">Редактировать профиль</a>
+                            <a href="{% url 'change_profile' %}" class="btn btn-outline-primary btn-sm">Редактировать профиль</a>
                         </div>
                         <div class="d-grid mt-4">
                             <a href="{% url 'logout' %}" class="btn btn-primary">Выйти из аккаунта</a>
