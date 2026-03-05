@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Профиль {{ current_user.username }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center p-5">
+                    
+                    <img src="{{ current_user.profile_picture }}" 
+                         alt="{{ current_user.username }}" 
+                         class="rounded-circle mb-3 border p-1" 
+                         style="width: 120px; height: 120px; object-fit: cover;">
+
+                    <h2 class="fw-bold mb-1">{{ current_user.username }}</h2>
+                    <p class="text-muted mb-4">Звание: Новичок EinQuiz</p>
+                    
+                    <div class="d-flex justify-content-center gap-3 mb-4">
+                        <div class="p-3 bg-light rounded shadow-sm" style="min-width: 120px;">
+                            <h5 class="mb-0 fw-bold text-primary">{{ current_user.points }}</h5>
+                            <small class="text-muted">Баллы</small>
+                        </div>
+                        <div class="p-3 bg-light rounded shadow-sm" style="min-width: 120px;">
+
+                            <h5 class="mb-0 fw-bold text-success">{{ current_user.completed_quizes|length }}</h5>
+                            <small class="text-muted">Тесты</small>
+                        </div>
+                    </div>
+
+                    <div class="text-start border-top pt-4">
+                        <h6 class="fw-bold">О себе:</h6>
+                        <p class="text-secondary">
+                            {% if current_user.description %}
+                                {{current_user.description}}
+                            {% else %}
+                                Этот пользователь пока ничего не рассказал о себе.
+                            {% endif %}
+                        </p>
+                    </div>
+
+                    {% if user.username == current_user.username %}
+                        <div class="d-grid mt-4">
+                            <a href="#" class="btn btn-outline-primary btn-sm">Редактировать профиль</a>
+                        </div>
+                        <div class="d-grid mt-4">
+                            <a href="{% url 'logout' %}" class="btn btn-primary">Выйти из аккаунта</a>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
