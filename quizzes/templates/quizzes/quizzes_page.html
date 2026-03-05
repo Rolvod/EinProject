@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Тесты{% endblock %}
+
+{% block content %}
+    {% for quiz in quizzes %}
+        <div class="alert alert-primary">
+            <h2><a href="{% url 'current_quiz' quiz.id %}">{{ quiz.name }}</a></h2>
+        </div>
+    {% endfor %}
+{% endblock %}
