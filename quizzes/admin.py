@@ -1,10 +1,18 @@
 from django.contrib import admin
-from .models import Question, Quiz, Answer
+from .models import Quiz, Question, Answer
 
-admin.site.register(Question)
-admin.site.register(Quiz)
-@admin.register(Answer)
-class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'question', 'is_correct')
-    list_filter = ('is_correct', 'question__quiz')
-    search_fields = ('name',)
+class AnswerInline(admin.TabularInline):
+    model = Answer
+    extra = 4
+
+class QuestionInline(admin.StackedInline):
+    model = Question
+    extra = 1
+
+@admin.register(Quiz)
+class QuizAdmin(admin.ModelAdmin):
+    inlines = [QuestionInline]
+
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    inlines = [AnswerInline]

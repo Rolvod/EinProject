@@ -21,18 +21,28 @@
                 {% endif %}
 
                 <div class="ms-2">
-                    {% for answer in question.answers.all %}
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" 
-                                   name="q_{{ question.id }}" 
-                                   id="ans_{{ answer.id }}"
-                                   value="{{ answer.id }}" required>
-                            <label class="form-check-label" for="ans_{{ answer.id }}">
-                                {{ answer.name }}
-                            </label>
-                        </div>
-                    {% endfor %}
-                </div>
+    {% for answer in question.answers.all %}
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" 
+                   name="q_{{ question.id }}" 
+                   id="ans_{{ answer.id }}"
+                   value="{{ answer.id }}" required>
+            
+            <label class="form-check-label" for="ans_{{ answer.id }}">
+                {{ answer.name }}
+                
+                
+                {% if answer.photo %}
+                    <br>
+                    <img src="{{ answer.photo }}" 
+                         class="img-thumbnail mt-2" 
+                         style="max-height: 150px; cursor: pointer;">
+                {% endif %}
+            </label>
+        </div>
+    {% endfor %}
+</div>
+
             </div>
         {% endfor %}
         <button type="submit" class="btn btn-success mt-3 mb-5">Завершить тест</button>
