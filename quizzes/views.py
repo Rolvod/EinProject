@@ -1,10 +1,13 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Quiz, Answer, Question
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def quizzes_page(request):
-    quizzes = Quiz.objects.all()
+    quizzes = Quiz.objects.filter(public=True)
     return render(request, 'quizzes/quizzes_page.html', {'quizzes': quizzes})
 
+@login_required
 def quiz_detail(request, id):
     quiz = get_object_or_404(Quiz, id=id)
     

@@ -4,11 +4,13 @@ class Quiz(models.Model):
     name = models.CharField('Название теста', max_length=64)
     description = models.TextField('Описание', blank=True)
     photo = models.URLField('Фото (URL ссылка)', blank=True)
+    public = models.BooleanField('Публична?', default=False)
 
     def __str__(self):
         return self.name
     
     class Meta:
+        ordering = ('-id',)
         verbose_name = 'Тест'
         verbose_name_plural = 'Тесты'
 

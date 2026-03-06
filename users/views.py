@@ -19,7 +19,7 @@ def register(request):
         form = RegistrationForm()
     return render(request, 'users/register.html', {'form': form})
 
-
+@login_required
 def ulogout(request):
     logout(request)
     return redirect('home')
