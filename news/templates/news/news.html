@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Новости EinQuiz{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+
+    <div class="alert alert-secondary text-center">
+        <h1>Последние новости</h1>
+    </div>
+
+    {% for new in news %}
+
+        <div class="alert alert-primary">
+            <h2>{{ new.title }}</h2>
+            
+            {% if new.photo %}
+                <img src="{{ new.photo }}" class="img-fluid rounded mb-2 border" style="max-height: 180px;">
+            {% endif %}
+            
+            <p class="text-muted small">Дата: {{ new.date|date:"d.m.Y" }}</p>
+            
+            <a href="{% url 'current_news' new.id %}" class="btn btn-primary">Читать полностью</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

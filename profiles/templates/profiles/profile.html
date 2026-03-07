@@ -9,13 +9,14 @@
             
             <div>
                 <img src="{{ current_user.profile_picture }}" 
-                     style="width: 120px; height: 120px; object-fit: cover;">
+                     style="width: 120px; height: 120px; object-fit: cover; border-radius: 100%;">
                 <h2>{{ current_user.nickname }}</h2>
             </div>
 
             <div class="mt-4">
                 <p><b>баллы:</b> {{ current_user.points }}</p>
                 <p><b>Тестов пройдено:</b> {{ current_user.completed_quizzes|length }}</p>
+                <p><b>Звание:</b> {{ current_user.rank }}</p>
                 <p><b>Роль:</b> {% if current_user.is_superuser %} <b style="color: red;">Администратор</b> {% else %} <b>Пользователь</b> {% endif %}</p>
             </div>
 
