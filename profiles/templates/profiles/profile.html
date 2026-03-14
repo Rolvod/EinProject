@@ -1,43 +1,56 @@
 {% extends 'main/base.html' %}
 
-{% block title %}Профиль {{ current_user.nickname }}{% endblock %}
+{% block title %}{{ current_user.nickname }}{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div>
-            
-            <div>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-body text-center p-5">
                 <img src="{{ current_user.profile_picture }}" 
-                     style="width: 120px; height: 120px; object-fit: cover; border-radius: 100%;">
-                <h2>{{ current_user.nickname }}</h2>
-            </div>
-
-            <div class="mt-4">
-                <p><b>баллы:</b> {{ current_user.points }}</p>
-                <p><b>Тестов пройдено:</b> {{ current_user.completed_quizzes|length }}</p>
-                <p><b>Звание:</b> {{ current_user.rank }}</p>
-                <p><b>Роль:</b> {% if current_user.is_superuser %} <b style="color: red;">Администратор</b> {% else %} <b>Пользователь</b> {% endif %}</p>
-            </div>
-
-            <div class="mt-3 border-top pt-3">
-                <h6>О себе:</h6>
-                <p>
-                    {% if current_user.description %}
-                        {{ current_user.description }}
-                    {% else %}
-                        Пользователь пока ничего не написал.
-                    {% endif %}
-                </p>
-            </div>
-
-            {% if user.username == current_user.username %}
-                <div>
-                    <a href="{% url 'change_profile' %}" class="btn btn-primary">Изменить данные</a>
-                    <a href="{% url 'logout' %}" class="btn btn-outline-danger">Выйти из аккаунта</a>
+                     class="rounded-circle border mb-4" 
+                     style="width: 150px; height: 150px; object-fit: cover;">
+                <h2 class="fw-bold">{{ current_user.nickname }}</h2>
+                
+                <div class="row mt-4 g-3">
+                    <div class="col-sm-4">
+                        <div class="border rounded p-3">
+                            <div class="small text-muted">Баллы</div>
+                            <div class="fw-bold fs-4">{{ current_user.points }}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="border rounded p-3">
+                            <div class="small text-muted">Тестов пройдено</div>
+                            <div class="fw-bold fs-4">{{ current_user.completed_quizzes|length }}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="border rounded p-3">
+                            <div class="small text-muted">Звание</div>
+                            <div class="fw-bold fs-4">{{ current_user.rank }}</div>
+                        </div>
+                    </div>
                 </div>
-            {% endif %}
 
+                <div class="mt-4">
+                    <span class="badge {% if current_user.is_superuser %}bg-danger{% else %}bg-info{% endif %} p-3 w-100">
+                        {% if current_user.is_superuser %}Администратор{% else %}Пользователь{% endif %}
+                    </span>
+                </div>
+
+                <div class="mt-4 border-top pt-4">
+                    <h6 class="text-muted">О себе</h6>
+                    <p>{{ current_user.description|default:"Пользователь пока ничего не написал." }}</p>
+                </div>
+
+                {% if user.username == current_user.username %}
+                    <div class="mt-4 d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a href="{% url 'change_profile' %}" class="btn btn-primary px-4">Изменить данные</a>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-danger px-4">Выйти</a>
+                    </div>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

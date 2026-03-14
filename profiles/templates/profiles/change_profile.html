@@ -3,12 +3,35 @@
 {% block title %}Изменить профиль{% endblock %}
 
 {% block content %}
-    <h1>Изменить профиль</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.nickname }} <br>
-        {{ form.description }} <br>
-        {{ form.profile_picture }} <br>
-        <input type="submit" class="btn btn-success" value="Изменить">
-    </form>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-transparent">
+                <h4 class="mb-0">Редактирование профиля</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Никнейм</label>
+                        {{ form.nickname }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Описание</label>
+                        {{ form.description }}
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">URL аватара</label>
+                        {{ form.profile_picture }}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100 py-2">Сохранить изменения</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

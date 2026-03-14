@@ -1,26 +1,34 @@
 {% extends 'main/base.html' %}
 
-{% block title %}Новости EinQuiz{% endblock %}
+{% block title %}Новости{% endblock %}
 
 {% block content %}
-<div class="container mt-3">
+<h1 class="display-6 fw-bold mb-4">Последние новости</h1>
 
-    <div class="alert alert-secondary text-center">
-        <h1>Последние новости</h1>
-    </div>
-
+<div class="row g-4">
     {% for new in news %}
-
-        <div class="alert alert-primary">
-            <h2>{{ new.title }}</h2>
-            
-            {% if new.photo %}
-                <img src="{{ new.photo }}" class="img-fluid rounded mb-2 border" style="max-height: 180px;">
-            {% endif %}
-            
-            <p class="text-muted small">Дата: {{ new.date|date:"d.m.Y" }}</p>
-            
-            <a href="{% url 'current_news' new.id %}" class="btn btn-primary">Читать полностью</a>
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="row g-0">
+                    {% if new.photo %}
+                        <div class="col-md-3">
+                            <img src="{{ new.photo }}" class="img-fluid rounded-start h-100" style="object-fit: cover;">
+                        </div>
+                    {% endif %}
+                    <div class="col-md-{% if new.photo %}9{% else %}12{% endif %}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ new.title }}</h5>
+                            <p class="card-text text-muted small">{{ new.date|date:"d.m.Y" }}</p>
+                            <p class="card-text">{{ new.text|truncatechars:200 }}</p>
+                            <a href="{% url 'current_news' new.id %}" class="btn btn-sm btn-outline-primary">Читать далее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">Новостей пока нет.</div>
         </div>
     {% endfor %}
 </div>

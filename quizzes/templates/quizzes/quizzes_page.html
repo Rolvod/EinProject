@@ -3,25 +3,29 @@
 {% block title %}Все тесты{% endblock %}
 
 {% block content %}
-<div class="container mt-3">
-    
-    <div class="alert alert-secondary">
-        <h1 class="text-center">Список доступных тестов</h1>
+<div class="row mb-4">
+    <div class="col">
+        <h1 class="display-6 fw-bold">Доступные тесты</h1>
     </div>
+</div>
 
-    
+<div class="row g-4">
     {% for quiz in quizzes %}
-        <div class="alert alert-info mb-3 border">
-            
-            {% if quiz.photo %}
-                <img src="{{ quiz.photo }}" class="img-fluid rounded mb-2" style="max-height: 150px;">
-            {% endif %}
-            
-            <h2>{{ quiz.name }}</h2>
-            <p>{{ quiz.description|default:"Описание теста." }}</p>
-            
-            
-            <a href="{% url 'current_quiz' quiz.id %}" class="btn btn-primary">Начать тест</a>
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+                {% if quiz.photo %}
+                    <img src="{{ quiz.photo }}" class="card-img-top" style="height: 160px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ quiz.name }}</h5>
+                    <p class="card-text text-muted small">{{ quiz.description|default:"Описание теста." }}</p>
+                    <a href="{% url 'current_quiz' quiz.id %}" class="btn btn-primary w-100">Начать тест</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">Пока нет доступных тестов.</div>
         </div>
     {% endfor %}
 </div>
